@@ -1,0 +1,6 @@
+.slider-image {
+    position: absolute;
+    width: auto;
+    height: 80%;
+    object-fit: cover;
+}
