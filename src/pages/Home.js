@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import BackgroundSlider from "../components/BackgroundSlider/BackgroundSlider";
+import { withFirebase } from "../components/Firebase/context";
 import {
   IonContent,
   IonHeader,
@@ -18,6 +19,7 @@ import {
   IonItemGroup,
   IonItem,
   IonText,
+  IonItemDivider,
 } from "@ionic/react";
 
 const Home = (props) => {
@@ -90,13 +92,8 @@ const Home = (props) => {
                 </IonText>
               ) : null}
             </IonItemGroup>
-            <Link to="/forgot">
-              <p className="ion-text-end ion-padding">Forgot Password?</p>
-            </Link>
-
             <IonButton
               className="ion-margin-bottom"
-              type="submit"
               expand="block"
               color="primary"
               disabled={isInvalid}
@@ -106,12 +103,21 @@ const Home = (props) => {
             </IonButton>
             <IonButton
               className="ion-margin-bottom"
-              type="submit"
               expand="block"
               color="secondary"
               routerLink="/signup"
             >
               Create Account
+            </IonButton>
+            <IonItemDivider />
+            <IonButton
+              className="ion-margin-bottom"
+              size="small"
+              expand="block"
+              color="dark"
+              routerLink="/forgotpassword"
+            >
+              Forgot Password?
             </IonButton>
           </IonCardContent>
         </IonCard>
@@ -120,4 +126,4 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+export default withFirebase(Home);
