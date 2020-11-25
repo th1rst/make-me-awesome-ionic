@@ -15,6 +15,7 @@ import {
   IonInput,
   IonText,
 } from "@ionic/react";
+import Navbar from "../components/Navigation/Navbar";
 
 function ForgotPassword(props) {
   const [email, setEmail] = useState("");
@@ -35,6 +36,7 @@ function ForgotPassword(props) {
 
   return (
     <IonPage>
+      <Navbar />
       <IonContent fullscreen>
         <IonCard>
           <IonCardTitle className="ion-padding ion-text-center ion-text-uppercase">

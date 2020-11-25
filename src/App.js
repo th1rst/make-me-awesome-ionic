@@ -6,6 +6,8 @@ import Firebase from "./components/Firebase/Firebase";
 import FirebaseContext from "./components/Firebase/context";
 import Home from "./pages/Home";
 import ForgotPassword from "./pages/ForgotPassword";
+import SignUpPage from "./pages/SignUpPage";
+import Overview from "./pages/Overview";
 
 import "@ionic/react/css/core.css";
 import "@ionic/react/css/normalize.css";
@@ -19,14 +21,19 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 
-
 const App = () => (
   <IonApp>
     <FirebaseContext.Provider value={new Firebase()}>
       <IonReactRouter>
         <IonRouterOutlet>
           <Route path="/" component={Home} exact={true} />
-          <Route path="/forgotpassword" component={ForgotPassword} exact={true} />
+          <Route
+            path="/forgotpassword"
+            component={ForgotPassword}
+            exact={true}
+          />
+          <Route path="/signup" component={SignUpPage} exact={true} />
+          <Route path="/overview" component={Overview} exact={true} />
         </IonRouterOutlet>
       </IonReactRouter>
     </FirebaseContext.Provider>

@@ -4,10 +4,7 @@ import BackgroundSlider from "../components/BackgroundSlider/BackgroundSlider";
 import { withFirebase } from "../components/Firebase/context";
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
   IonCard,
   IonCardTitle,
   IonCardSubtitle,
@@ -21,6 +18,7 @@ import {
   IonText,
   IonItemDivider,
 } from "@ionic/react";
+import Navbar from "../components/Navigation/Navbar";
 
 const Home = (props) => {
   const [email, setEmail] = useState("");
@@ -48,12 +46,7 @@ const Home = (props) => {
     <Redirect to="/overview" />
   ) : (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
+      <Navbar />
       <IonContent fullscreen>
         <IonCard>
           <IonCardTitle className="ion-padding ion-text-center ion-text-uppercase">
