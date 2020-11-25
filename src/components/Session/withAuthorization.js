@@ -6,12 +6,24 @@ import AuthUserContext from "./Context";
 
 const withAuthorization = (condition) => (Component) => {
   class WithAuthorization extends React.Component {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        authUser: JSON.parse(window.localStorage.getItem("authUser")),
+      };
+    }
+
     componentDidMount() {
+      console.log("WITHAUTH MOUNTED");
       this.listener = this.props.firebase.auth.onAuthStateChanged(
         (authUser) => {
-          if (!condition(authUser)) {
-            this.props.history.push("/");
-          }
+          window.localStorage.setItem("authUser", JSON.stringify(authUser));
+          this.setState({ authUser });
+        },
+        () => {
+          window.localStorage.removeItem("authUser");
+          this.setState({ authUser: null });
         }
       );
     }

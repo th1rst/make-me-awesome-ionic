@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import withAuthorization from "../components/Session/withAuthorization";
-import { IonPage, IonText, IonLoading } from "@ionic/react";
+import { IonPage, IonText, IonLoading, IonContent } from "@ionic/react";
 import Navbar from "../components/Navigation/Navbar";
+import { withFirebase } from "../components/Firebase/context";
 
 function Overview(props) {
-  const authUser = JSON.parse(localStorage.getItem("authUser"));
+  const authUser = JSON.parse(window.localStorage.getItem("authUser"));
   const [loading, setLoading] = useState(true);
   const [firestoreActivities, setFirestoreActivities] = useState(null);
   const [randomQuote, setRandomQuote] = useState("");
@@ -19,7 +20,6 @@ function Overview(props) {
     getUserData();
     getQuickActivities();
   }, []);
-
 
   const getActivityData = async () => {
     const response = await props.firebase.db
@@ -92,21 +92,19 @@ function Overview(props) {
   };
 
   return (
-    <>
+    <IonPage>
       {loading ? (
         <IonLoading />
       ) : (
         <>
           <Navbar />
-          <IonPage>
+          <IonContent fullscreen>
             <IonText color="primary">ASDASDASDASD</IonText>
-          </IonPage>
+          </IonContent>
         </>
       )}
-    </>
+    </IonPage>
   );
 }
 
-const condition = (authUser) => !!authUser;
-
-export default withAuthorization(condition)(Overview);
+export default withFirebase(Overview);

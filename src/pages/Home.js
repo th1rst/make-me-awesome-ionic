@@ -46,7 +46,6 @@ const Home = (props) => {
     <Redirect to="/overview" />
   ) : (
     <IonPage>
-      <Navbar />
       <IonContent fullscreen>
         <IonCard>
           <IonCardTitle className="ion-padding ion-text-center ion-text-uppercase">
