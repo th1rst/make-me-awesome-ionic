@@ -18,7 +18,6 @@ import {
   IonText,
   IonItemDivider,
 } from "@ionic/react";
-import Navbar from "../components/Navigation/Navbar";
 
 const Home = (props) => {
   const [email, setEmail] = useState("");

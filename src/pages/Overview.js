@@ -1,7 +1,19 @@
 import React, { useEffect, useState } from "react";
-import withAuthorization from "../components/Session/withAuthorization";
-import { IonPage, IonText, IonLoading, IonContent } from "@ionic/react";
+import {
+  IonPage,
+  IonButton,
+  IonLoading,
+  IonContent,
+  IonImg,
+  IonList,
+  IonItem,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonText,
+} from "@ionic/react";
 import Navbar from "../components/Navigation/Navbar";
+import "./pages.css";
 import { withFirebase } from "../components/Firebase/context";
 
 function Overview(props) {
@@ -13,6 +25,9 @@ function Overview(props) {
   const [daysToDisplay, setDaysToDisplay] = useState(7);
   const [bannerURL, setBannerURL] = useState(null);
   const [quickActivities, setQuickActivities] = useState(null);
+
+  const defaultBanner =
+    "https://images.unsplash.com/photo-1500856056008-859079534e9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80";
 
   useEffect(() => {
     getQuote();
@@ -99,7 +114,34 @@ function Overview(props) {
         <>
           <Navbar />
           <IonContent fullscreen>
-            <IonText color="primary">ASDASDASDASD</IonText>
+            <IonImg
+              className="banner-image"
+              src={bannerURL ? bannerURL : defaultBanner}
+            />
+            <IonGrid className="container">
+              <IonRow className="row ion-justify-content-center">
+                <IonText className="welcome-text">Welcome back,</IonText>
+                <IonText className="username-text">{username}</IonText>
+              </IonRow>
+              <IonRow className="row button-container">
+                <IonCol>
+                  <IonRow className="ion-justify-content-center ion-margin">
+                    <IonButton>Show All</IonButton>
+                  </IonRow>
+                  <IonRow className="ion-justify-content-center ion-margin">
+                    <IonButton>Start Live Activity</IonButton>
+                  </IonRow>
+                  <IonRow className="ion-justify-content-center ion-margin">
+                    <IonButton>Manual Entry</IonButton>
+                  </IonRow>
+                </IonCol>
+              </IonRow>
+              <IonRow className="row ion-justify-content-center ion-padding">
+                <IonText className="quote-text">
+                  &quot;{randomQuote}&quot;
+                </IonText>
+              </IonRow>
+            </IonGrid>
           </IonContent>
         </>
       )}

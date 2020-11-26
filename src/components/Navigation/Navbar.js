@@ -7,7 +7,16 @@ import {
   IonMenuButton,
   IonAvatar,
   IonItem,
+  IonCard,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonCardContent,
+  IonListHeader,
+  IonLabel,
+  IonList,
 } from "@ionic/react";
+import "./navbar.css";
 import { withFirebase } from "../Firebase/context";
 
 export function Navbar(props) {
@@ -37,28 +46,60 @@ export function Navbar(props) {
   };
 
   return (
-    <IonHeader>
-      <IonToolbar>
-        <IonButtons slot="start">
-          <IonMenuButton
-            auto-hide="false"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          ></IonMenuButton>
-        </IonButtons>
-        <IonButtons slot="end">
-          <IonItem>
-            <IonAvatar onClick={() => setUserMenuOpen(!userMenuOpen)}>
+    <>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonMenuButton
+              auto-hide="false"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+            />
+          </IonButtons>
+          <IonButtons slot="end">
+            <IonAvatar
+              className="avatar"
+              onClick={() => setUserMenuOpen(!userMenuOpen)}
+            >
               <img
                 src={photoURL ? `${photoURL}` : `${defaultImage}`}
                 alt="avatar"
               />
             </IonAvatar>
-          </IonItem>
-        </IonButtons>
+          </IonButtons>
 
-        <IonTitle center>Blank</IonTitle>
-      </IonToolbar>
-    </IonHeader>
+          <IonTitle center>Blank</IonTitle>
+        </IonToolbar>
+
+        {sidebarOpen ? (
+          <IonCard>
+            <IonCardHeader>
+              <IonCardSubtitle>Home, All Activities etc</IonCardSubtitle>
+              <IonCardTitle>SIDEBAR</IonCardTitle>
+            </IonCardHeader>
+
+            <IonCardContent>
+              Keep close to Nature's heart... and break clear away, once in
+              awhile, and climb a mountain or spend a week in the woods. Wash
+              your spirit clean.
+            </IonCardContent>
+          </IonCard>
+        ) : null}
+
+        {userMenuOpen ? (
+          <IonList>
+            <IonListHeader>
+              <IonLabel>List Header</IonLabel>
+            </IonListHeader>
+
+            <IonCardContent>
+              Keep close to Nature's heart... and break clear away, once in
+              awhile, and climb a mountain or spend a week in the woods. Wash
+              your spirit clean.
+            </IonCardContent>
+          </IonList>
+        ) : null}
+      </IonHeader>
+    </>
   );
 }
 
