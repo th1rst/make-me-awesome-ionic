@@ -5,16 +5,20 @@ import {
   IonLoading,
   IonContent,
   IonImg,
+  IonCard,
   IonList,
   IonItem,
   IonGrid,
   IonRow,
   IonCol,
   IonText,
+  IonCardHeader,
+  IonCardContent,
 } from "@ionic/react";
 import Navbar from "../components/Navigation/Navbar";
 import "./pages.css";
 import { withFirebase } from "../components/Firebase/context";
+import QuickActivity from "../components/Activities/QuickActivity";
 
 function Overview(props) {
   const authUser = JSON.parse(window.localStorage.getItem("authUser"));
@@ -140,6 +144,28 @@ function Overview(props) {
                 <IonText className="quote-text">
                   &quot;{randomQuote}&quot;
                 </IonText>
+              </IonRow>
+            </IonGrid>
+            <IonGrid>
+              <IonRow className="row">
+                {quickActivities.length > 0 ? (
+                  <IonText className="heading">Quick Activities</IonText>
+                ) : null}
+              </IonRow>
+              <IonRow className="row">
+                {quickActivities
+                  ? quickActivities.map((activity) => (
+                      <QuickActivity
+                        name={activity.name}
+                        id={activity.id}
+                        category={activity.category}
+                        picture={activity.activityPictureURL}
+                        duration={activity.duration}
+                        productiveness={activity.productiveness}
+                        key={activity.id}
+                      />
+                    ))
+                  : null}
               </IonRow>
             </IonGrid>
           </IonContent>

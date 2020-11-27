@@ -32,6 +32,7 @@
 
 .row {
   width: 100%;
+  justify-content: center;
 }
 
 .quote-text {
@@ -40,4 +41,11 @@
   font-style: italic;
   font-family: "Times New Roman", Times, serif;
   text-align: center;
+}
+
+.heading {
+  font-size: 2em;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0.5em auto;
 }
