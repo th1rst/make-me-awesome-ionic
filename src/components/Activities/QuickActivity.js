@@ -13,18 +13,20 @@ import {
   IonModal,
   IonToolbar,
   IonTitle,
-  IonButtons,
   IonHeader,
   IonIcon,
 } from "@ionic/react";
 import "./QuickActivity.css";
+import { GiStrong } from "react-icons/gi";
+import { AiFillCloseCircle } from "react-icons/ai";
+import ServerResponseToast from "../ServerResponseToast";
 
 function QuickActivity(props) {
   const authUser = JSON.parse(window.localStorage.getItem("authUser"));
   const [confirmModal, setConfirmModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [showServerResponseModal, setShowServerResponseModal] = useState(false);
+  const [showServerResponseToast, setShowServerResponseToast] = useState(false);
   const date = new Date();
   const notes = " ";
   const { name, category, picture, duration, productiveness } = props;
@@ -47,15 +49,15 @@ function QuickActivity(props) {
         notes: notes,
       })
       .then(() => {
+        setConfirmModal(false);
         setSuccessMessage("Sucessfully saved activity!");
-        setShowServerResponseModal(true);
+        setShowServerResponseToast(true);
       })
-      .then(() => setTimeout(() => setShowServerResponseModal(false), 5000))
       .catch((error) => {
+        setConfirmModal(false);
         setErrorMessage(error.message);
-        setShowServerResponseModal(true);
-      })
-      .then(() => setTimeout(() => setShowServerResponseModal(false), 5000));
+        setShowServerResponseToast(true);
+      });
   };
 
   return (
@@ -105,21 +107,65 @@ function QuickActivity(props) {
           <IonContent>
             <IonModal isOpen={confirmModal}>
               <IonHeader>
-                <IonToolbar className="ion-justify-content-center">
-                  <IonTitle>Add Activity?</IonTitle>
+                <IonToolbar>
+                  <IonTitle className="modal-header">
+                    <IonGrid>
+                      <IonRow className="ion-justify-content-between">
+                        <GiStrong size={32} fill={"green"} />
+                        Quick Activity
+                        <AiFillCloseCircle
+                          size={32}
+                          fill={"red"}
+                          onClick={() => setConfirmModal(!confirmModal)}
+                        />
+                      </IonRow>
+                    </IonGrid>
+                  </IonTitle>
                   <IonIcon name="close-circle-outline"></IonIcon>
                 </IonToolbar>
               </IonHeader>
 
-              <IonText color="primary">ASDASDASDASD</IonText>
+              <IonText className="subheading ion-margin-top" color="primary">
+                Are you sure you want to add the following activity:
+              </IonText>
               <IonGrid>
-                <IonRow className="row">
+                <IonRow>
+                  <IonCol className="ion-margin">
+                    <IonRow className="ion-margin">
+                      <IonText className="subheading">Name: </IonText>
+                    </IonRow>
+                    <IonRow className="ion-justify-content-center">
+                      {name}
+                    </IonRow>
+                    <IonRow className="ion-margin">
+                      <IonText className="subheading">Productivity: </IonText>
+                    </IonRow>
+                    <IonRow className="ion-justify-content-center">
+                      {productiveness}
+                    </IonRow>
+                  </IonCol>
+                  <IonCol className="ion-margin">
+                    <IonRow className="ion-margin">
+                      <IonText className="subheading">Duration: </IonText>
+                    </IonRow>
+                    <IonRow className="ion-justify-content-center">
+                      {duration}
+                    </IonRow>
+                    <IonRow className="ion-margin">
+                      <IonText className="subheading">Category: </IonText>
+                    </IonRow>
+                    <IonRow className="ion-justify-content-center">
+                      {category}
+                    </IonRow>
+                  </IonCol>
+                </IonRow>
+                <IonRow className="ion-margin-top ion-justify-content-center">
                   <IonButton
                     className="ion-margin"
                     size="medium"
                     expand="block"
                     color="success"
-                    onClick={() => setConfirmModal(!confirmModal)}
+                    onClick={sendActivity}
                   >
                     Yes, make me awesome!
                   </IonButton>
@@ -136,6 +182,12 @@ function QuickActivity(props) {
               </IonGrid>
             </IonModal>
           </IonContent>
+        ) : null}
+        {showServerResponseToast ? (
+          <ServerResponseToast
+            errorMessage={errorMessage}
+            successMessage={successMessage}
+          />
         ) : null}
       </IonCard>
     </>
