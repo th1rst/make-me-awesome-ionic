@@ -5,20 +5,21 @@ import {
   IonLoading,
   IonContent,
   IonImg,
-  IonCard,
-  IonList,
-  IonItem,
   IonGrid,
   IonRow,
   IonCol,
   IonText,
-  IonCardHeader,
-  IonCardContent,
+  IonItem,
+  IonLabel,
+  IonSelect,
+  IonSelectOption,
 } from "@ionic/react";
 import Navbar from "../components/Navigation/Navbar";
 import "./pages.css";
 import { withFirebase } from "../components/Firebase/context";
 import QuickActivity from "../components/Activities/QuickActivity";
+import SmallDonutChart from "../components/Activities/SmallDonutChart";
+import SmallBarChart from "../components/Activities/SmallBarChart";
 
 function Overview(props) {
   const authUser = JSON.parse(window.localStorage.getItem("authUser"));
@@ -152,7 +153,7 @@ function Overview(props) {
                   <IonText className="heading">Quick Activities</IonText>
                 ) : null}
               </IonRow>
-              <IonRow className="row">
+              <IonRow className="row ion-margin-bottom">
                 {quickActivities
                   ? quickActivities.map((activity) => (
                       <QuickActivity
@@ -167,12 +168,67 @@ function Overview(props) {
                     ))
                   : null}
               </IonRow>
+              <IonRow className="row ion-margin-top">
+                <IonText className="heading ion-margin-top">Overview</IonText>
+              </IonRow>
+
+              <IonItem>
+                <IonLabel className="ion-text-center">Show Last</IonLabel>
+                <IonSelect
+                  className="ion-text-center"
+                  value={daysToDisplay}
+                  okText="Select"
+                  cancelText="Cancel"
+                  onIonChange={(e) => setDaysToDisplay(e.detail.value)}
+                >
+                  <IonSelectOption value={7}>7 days</IonSelectOption>
+                  <IonSelectOption value={30}>30 days</IonSelectOption>
+                  <IonSelectOption value={90}>90 days</IonSelectOption>
+                  <IonSelectOption value={365}>365 days</IonSelectOption>
+                </IonSelect>
+              </IonItem>
             </IonGrid>
           </IonContent>
         </>
       )}
     </IonPage>
   );
+}
+
+{
+  /* 
+
+                <IonRow>
+                <SmallDonutChart
+                  daysToFilter={daysToDisplay}
+                  categoryToDisplay={"Productive"}
+                  firestoreActivities={firestoreActivities}
+                />
+              </IonRow>
+              <IonRow>
+                <SmallBarChart
+                  daysToFilter={daysToDisplay}
+                  categoryToDisplay={"Productive"}
+                  firestoreActivities={firestoreActivities}
+                />
+              </IonRow>
+              <IonRow>
+                <SmallBarChart
+                  daysToFilter={daysToDisplay}
+                  categoryToDisplay={"Neutral / Necessary"}
+                  firestoreActivities={firestoreActivities}
+                />
+              </IonRow>
+              <IonRow>
+                <SmallBarChart
+                  daysToFilter={daysToDisplay}
+                  categoryToDisplay={"Unproductive"}
+                  firestoreActivities={firestoreActivities}
+                />
+
+              </IonRow>
+
+*/
 }
 
 export default withFirebase(Overview);

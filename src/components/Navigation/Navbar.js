@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   IonHeader,
   IonToolbar,
@@ -6,7 +7,6 @@ import {
   IonButtons,
   IonMenuButton,
   IonAvatar,
-  IonItem,
   IonCard,
   IonCardHeader,
   IonCardSubtitle,
@@ -15,6 +15,9 @@ import {
   IonListHeader,
   IonLabel,
   IonList,
+  IonGrid,
+  IonRow,
+  IonText,
 } from "@ionic/react";
 import "./navbar.css";
 import { withFirebase } from "../Firebase/context";
@@ -67,7 +70,18 @@ export function Navbar(props) {
             </IonAvatar>
           </IonButtons>
 
-          <IonTitle center>Blank</IonTitle>
+          <IonTitle>
+            <IonGrid>
+              <IonRow className="ion-justify-content-center">
+                <Link
+                  to="/overview"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <IonText>Make Me Awesome</IonText>
+                </Link>
+              </IonRow>
+            </IonGrid>
+          </IonTitle>
         </IonToolbar>
 
         {sidebarOpen ? (
