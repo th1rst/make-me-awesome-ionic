@@ -187,48 +187,40 @@ function Overview(props) {
                   <IonSelectOption value={365}>365 days</IonSelectOption>
                 </IonSelect>
               </IonItem>
-            </IonGrid>
-          </IonContent>
-        </>
-      )}
-    </IonPage>
-  );
-}
-
-{
-  /* 
-
-                <IonRow>
+              <IonRow className="ion-margin row">
                 <SmallDonutChart
                   daysToFilter={daysToDisplay}
                   categoryToDisplay={"Productive"}
                   firestoreActivities={firestoreActivities}
                 />
               </IonRow>
-              <IonRow>
+              <IonRow className="ion-margin row">
                 <SmallBarChart
                   daysToFilter={daysToDisplay}
                   categoryToDisplay={"Productive"}
                   firestoreActivities={firestoreActivities}
                 />
               </IonRow>
-              <IonRow>
+              <IonRow className="ion-margin row">
                 <SmallBarChart
                   daysToFilter={daysToDisplay}
                   categoryToDisplay={"Neutral / Necessary"}
                   firestoreActivities={firestoreActivities}
                 />
               </IonRow>
-              <IonRow>
+              <IonRow className="ion-margin row">
                 <SmallBarChart
                   daysToFilter={daysToDisplay}
                   categoryToDisplay={"Unproductive"}
                   firestoreActivities={firestoreActivities}
                 />
-
               </IonRow>
-
-*/
+            </IonGrid>
+          </IonContent>
+        </>
+      )}
+    </IonPage>
+  );
 }
 
 export default withFirebase(Overview);

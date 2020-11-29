@@ -64,7 +64,6 @@ class SmallDonutChart extends Component {
           options={this.state.options}
           series={this.state.series}
           type="donut"
-          width="350"
         />
       </div>
     );
