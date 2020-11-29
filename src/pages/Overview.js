@@ -20,6 +20,7 @@ import { withFirebase } from "../components/Firebase/context";
 import QuickActivity from "../components/Activities/QuickActivity";
 import SmallDonutChart from "../components/Activities/SmallDonutChart";
 import SmallBarChart from "../components/Activities/SmallBarChart";
+import ManualActivityModal from "../components/Activities/ManualActivityModal";
 
 function Overview(props) {
   const authUser = JSON.parse(window.localStorage.getItem("authUser"));
@@ -30,6 +31,7 @@ function Overview(props) {
   const [daysToDisplay, setDaysToDisplay] = useState(7);
   const [bannerURL, setBannerURL] = useState(null);
   const [quickActivities, setQuickActivities] = useState(null);
+  const [showManualActivityModal, setShowManualActivityModal] = useState(false);
 
   const defaultBanner =
     "https://images.unsplash.com/photo-1500856056008-859079534e9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80";
@@ -137,7 +139,9 @@ function Overview(props) {
                     <IonButton>Start Live Activity</IonButton>
                   </IonRow>
                   <IonRow className="ion-justify-content-center ion-margin">
-                    <IonButton>Manual Entry</IonButton>
+                    <IonButton onClick={() => setShowManualActivityModal(true)}>
+                      Manual Entry
+                    </IonButton>
                   </IonRow>
                 </IonCol>
               </IonRow>
@@ -216,6 +220,10 @@ function Overview(props) {
                 />
               </IonRow>
             </IonGrid>
+
+            {/* ------------- MANUAL ACTIVITY MODAL ------------- */}
+
+            {showManualActivityModal ? <ManualActivityModal /> : null}
           </IonContent>
         </>
       )}
