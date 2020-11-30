@@ -28,6 +28,7 @@ import QuickActivity from "../components/Activities/QuickActivity";
 import SmallDonutChart from "../components/Activities/SmallDonutChart";
 import SmallBarChart from "../components/Activities/SmallBarChart";
 import ManualActivityModalForm from "../components/Activities/ManualActivityModalForm";
+import LiveActivityModalForm from "../components/Activities/LiveActivityModalForm";
 
 function Overview(props) {
   const authUser = JSON.parse(window.localStorage.getItem("authUser"));
@@ -39,6 +40,7 @@ function Overview(props) {
   const [bannerURL, setBannerURL] = useState(null);
   const [quickActivities, setQuickActivities] = useState(null);
   const [showManualActivityModal, setShowManualActivityModal] = useState(false);
+  const [showLiveActivityModal, setShowLiveActivityModal] = useState(false);
 
   const defaultBanner =
     "https://images.unsplash.com/photo-1500856056008-859079534e9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80";
@@ -143,7 +145,9 @@ function Overview(props) {
                     <IonButton>Show All</IonButton>
                   </IonRow>
                   <IonRow className="ion-justify-content-center ion-margin">
-                    <IonButton>Start Live Activity</IonButton>
+                    <IonButton onClick={() => setShowLiveActivityModal(true)}>
+                      Start Live Activity
+                    </IonButton>
                   </IonRow>
                   <IonRow className="ion-justify-content-center ion-margin">
                     <IonButton onClick={() => setShowManualActivityModal(true)}>
@@ -256,6 +260,36 @@ function Overview(props) {
                     </IonToolbar>
                   </IonHeader>
                   <ManualActivityModalForm />
+                </IonModal>
+              </IonContent>
+            ) : null}
+
+            {/* ------------- LIVE ACTIVITY MODAL ------------- */}
+
+            {showLiveActivityModal ? (
+              <IonContent>
+                <IonModal isOpen={showLiveActivityModal}>
+                  <IonHeader>
+                    <IonToolbar>
+                      <IonTitle className="modal-header">
+                        <IonGrid>
+                          <IonRow className="ion-justify-content-between">
+                            <GiStrong size={32} fill={"green"} />
+                            Start Live Activity
+                            <AiFillCloseCircle
+                              size={32}
+                              fill={"red"}
+                              onClick={() =>
+                                setShowLiveActivityModal(!showLiveActivityModal)
+                              }
+                            />
+                          </IonRow>
+                        </IonGrid>
+                      </IonTitle>
+                      <IonIcon name="close-circle-outline"></IonIcon>
+                    </IonToolbar>
+                  </IonHeader>
+                  <LiveActivityModalForm />
                 </IonModal>
               </IonContent>
             ) : null}

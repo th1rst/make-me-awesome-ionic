@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Firebase from "./components/Firebase/Firebase";
@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import ForgotPassword from "./pages/ForgotPassword";
 import SignUpPage from "./pages/SignUpPage";
 import Overview from "./pages/Overview";
+import LiveActivity from "./pages/LiveActivity";
 
 import "@ionic/react/css/core.css";
 import "@ionic/react/css/normalize.css";
@@ -26,14 +27,17 @@ const App = () => (
     <FirebaseContext.Provider value={new Firebase()}>
       <IonReactRouter>
         <IonRouterOutlet>
-          <Route path="/" component={Home} exact={true} />
-          <Route
-            path="/forgotpassword"
-            component={ForgotPassword}
-            exact={true}
-          />
-          <Route path="/signup" component={SignUpPage} exact={true} />
-          <Route path="/overview" component={Overview} exact={true} />
+          <BrowserRouter>
+            <Route path="/" component={Home} exact={true} />
+            <Route
+              path="/forgotpassword"
+              component={ForgotPassword}
+              exact={true}
+            />
+            <Route path="/activity" component={LiveActivity} exact={true} />
+            <Route path="/signup" component={SignUpPage} exact={true} />
+            <Route path="/overview" component={Overview} exact={true} />
+          </BrowserRouter>
         </IonRouterOutlet>
       </IonReactRouter>
     </FirebaseContext.Provider>
