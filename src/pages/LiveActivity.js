@@ -26,6 +26,7 @@ import {
   IonCard,
   IonTextarea,
   IonButton,
+  IonCol,
 } from "@ionic/react";
 
 function LiveActivity(props) {
@@ -117,7 +118,6 @@ function LiveActivity(props) {
   return (
     <IonPage>
       <>
-        {console.log(props)}
         {activityName ? (
           <>
             <Navbar />
@@ -129,21 +129,28 @@ function LiveActivity(props) {
                       {activityName}
                     </IonText>
                   </IonRow>
-                  <IonRow>
+                  <IonRow className="row">
                     {activityType === "Timer" ? (
                       <>
-                        <FaRegClock className="w-20 h-20 self-center" />
-                        <IonText className="subheading">{activityType}</IonText>
+                        <FaRegClock className="ion-margin" size={32} />
+                        <IonText
+                          className="ion-margin"
+                          style={{ fontSize: "2em" }}
+                        >
+                          {activityType}
+                        </IonText>
                       </>
                     ) : (
                       <>
-                        <FiPlusSquare className="w-20 h-20 self-center" />
-                        <IonText className="subheading">{activityType}</IonText>
+                        <FiPlusSquare />
+                        <IonText>{activityType}</IonText>
                       </>
                     )}
                   </IonRow>
-                  <IonRow>{checkProductivity(productivityType)}</IonRow>
-                  <IonRow>
+                  <IonRow className="row">
+                    {checkProductivity(productivityType)}
+                  </IonRow>
+                  <IonRow className="row ion-margin">
                     {activityType === "Timer" ? (
                       <Timer
                         initialTime={0}
@@ -154,80 +161,103 @@ function LiveActivity(props) {
                       >
                         {({ start, stop, reset, getTime }) => (
                           <>
-                            <Timer.Hours />:
-                            <Timer.Minutes />:
-                            <Timer.Seconds />
-                            <IonButton onClick={start}>
-                              <FiPlayCircle />
-                              Start
-                            </IonButton>
-                            <IonButton onClick={stop}>
-                              <FiPauseCircle />
-                              Pause
-                            </IonButton>
-                            <IonButton
-                              onClick={() => {
-                                stop();
-                                reset();
-                              }}
-                            >
-                              <FiTrash2 />
-                              Reset
-                            </IonButton>
-                            <IonButton
-                              onClick={() => {
-                                stop();
-                                saveActivityTime(getTime());
-                              }}
-                            >
-                              <FiSave />
-                              Save
-                            </IonButton>
+                            <IonRow className="row">
+                              <div style={{ fontSize: "2em" }}>
+                                <Timer.Hours />:
+                                <Timer.Minutes />:
+                                <Timer.Seconds />
+                              </div>
+                            </IonRow>
+                            <IonRow className="row">
+                              <IonButton onClick={start}>
+                                <FiPlayCircle />
+                                Start
+                              </IonButton>
+                              <IonButton onClick={stop}>
+                                <FiPauseCircle />
+                                Pause
+                              </IonButton>
+                              <IonButton
+                                onClick={() => {
+                                  stop();
+                                  reset();
+                                }}
+                              >
+                                <FiTrash2 />
+                                Reset
+                              </IonButton>
+                              <IonButton
+                                onClick={() => {
+                                  stop();
+                                  saveActivityTime(getTime());
+                                }}
+                              >
+                                <FiSave />
+                                Save
+                              </IonButton>
+                            </IonRow>
                           </>
                         )}
                       </Timer>
                     ) : (
                       <>
                         {/* ------------- COUNTER VARIANT ------------- */}
-                        <IonButton
-                          onClick={() => {
-                            calculateActivityTime();
-                            setActivityCount(activityCount - 1);
-                          }}
-                        >
-                          <FiMinusSquare />
-                        </IonButton>
-                        Count: {activityCount}
-                        <IonButton
-                          onClick={() => {
-                            calculateActivityTime();
-                            setActivityCount(activityCount + 1);
-                          }}
-                        >
-                          <FiPlusSquare />
-                        </IonButton>
-                        <IonButton
-                          onClick={() => {
-                            calculateActivityTime();
-                            setTimePerCount(timePerCount - 1);
-                          }}
-                        >
-                          <FiMinusSquare />
-                        </IonButton>
-                        Time per count: <br />
-                        {timePerCount} Minutes
-                        <IonButton
-                          onClick={() => {
-                            calculateActivityTime();
-                            setTimePerCount(timePerCount + 1);
-                          }}
-                        >
-                          <FiPlusSquare />
-                        </IonButton>
-                        <p>
-                          Total time spent on {activityName}:{" "}
-                          {calculateActivityTime()} Minutes
-                        </p>
+                        <IonRow>
+                          <IonCol>
+                            <IonButton
+                              onClick={() => {
+                                calculateActivityTime();
+                                setActivityCount(activityCount - 1);
+                              }}
+                            >
+                              <FiMinusSquare />
+                            </IonButton>
+                          </IonCol>
+                          <IonCol>Count: {activityCount}</IonCol>
+                          <IonCol>
+                            <IonButton
+                              onClick={() => {
+                                calculateActivityTime();
+                                setActivityCount(activityCount + 1);
+                              }}
+                            >
+                              <FiPlusSquare />
+                            </IonButton>
+                          </IonCol>
+                        </IonRow>
+
+                        <IonRow>
+                          <IonCol>
+                            <IonButton
+                              onClick={() => {
+                                calculateActivityTime();
+                                setTimePerCount(timePerCount - 1);
+                              }}
+                            >
+                              <FiMinusSquare />
+                            </IonButton>
+                          </IonCol>
+                          <IonCol>
+                            Time per count: <br />
+                            {timePerCount} Minutes
+                          </IonCol>
+                          <IonCol>
+                            <IonButton
+                              onClick={() => {
+                                calculateActivityTime();
+                                setTimePerCount(timePerCount + 1);
+                              }}
+                            >
+                              <FiPlusSquare />
+                            </IonButton>
+                          </IonCol>
+                        </IonRow>
+                        <IonRow className="row">
+                          <p className="subheading">
+                            Total time spent on {activityName}:{" "}
+                            {calculateActivityTime()} Minutes
+                          </p>
+                        </IonRow>
                       </>
                     )}
                   </IonRow>
