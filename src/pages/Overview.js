@@ -22,6 +22,7 @@ import SmallDonutChart from "../components/Activities/SmallDonutChart";
 import SmallBarChart from "../components/Activities/SmallBarChart";
 import ManualActivityModal from "../components/Activities/ManualActivityModal";
 import LiveActivityModal from "../components/Activities/LiveActivityModal";
+import { Link } from "react-router-dom";
 
 function Overview(props) {
   const authUser = JSON.parse(window.localStorage.getItem("authUser"));
@@ -135,7 +136,12 @@ function Overview(props) {
               <IonRow className="row button-container">
                 <IonCol>
                   <IonRow className="ion-justify-content-center ion-margin">
-                    <IonButton>Show All</IonButton>
+                    <Link
+                      to="/all-activities"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <IonButton>Show All</IonButton>
+                    </Link>
                   </IonRow>
                   <IonRow className="ion-justify-content-center ion-margin">
                     <IonButton onClick={() => setShowLiveActivityModal(true)}>

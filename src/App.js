@@ -9,6 +9,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import SignUpPage from "./pages/SignUpPage";
 import Overview from "./pages/Overview";
 import LiveActivity from "./pages/LiveActivity";
+import AllActivities from "./pages/AllActivities";
 
 import "@ionic/react/css/core.css";
 import "@ionic/react/css/normalize.css";
@@ -29,14 +30,11 @@ const App = () => (
         <IonRouterOutlet>
           <BrowserRouter>
             <Route path="/" component={Home} exact={true} />
-            <Route
-              path="/forgotpassword"
-              component={ForgotPassword}
-              exact={true}
-            />
+            <Route path="/forgotpassword" component={ForgotPassword} exact={true} />
             <Route path="/activity" component={LiveActivity} exact={true} />
             <Route path="/signup" component={SignUpPage} exact={true} />
             <Route path="/overview" component={Overview} exact={true} />
+            <Route path="/all-activities" component={AllActivities} exact={true} />
           </BrowserRouter>
         </IonRouterOutlet>
       </IonReactRouter>

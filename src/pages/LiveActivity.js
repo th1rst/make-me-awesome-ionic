@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { withFirebase } from "../components/Firebase/context";
 import Navbar from "../components/Navigation/Navbar";
 import Timer from "react-compound-timer";
@@ -11,8 +10,6 @@ import {
   FiMinusSquare,
   FiPlusSquare,
 } from "react-icons/fi";
-import { FaExclamationTriangle } from "react-icons/fa";
-import { AiFillCloseCircle } from "react-icons/ai";
 import { FaRegClock } from "react-icons/fa";
 import "./pages.css";
 import ServerResponseToast from "../components/ServerResponseToast";
