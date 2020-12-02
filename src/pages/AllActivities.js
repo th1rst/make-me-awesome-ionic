@@ -23,26 +23,30 @@ function AllActivities(props) {
         customBodyRender: (value) => {
           return (
             <>
-              <div>
-                <p>{value}</p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    deleteActivity(value).then(() => {
-                      const newData = firestoreActivities.filter((entry) =>
-                        entry.id !== value ? value : null
-                      );
-                      setFirestoreActivities(newData);
-                      formatData(newData);
-                    });
+              <p>{value}</p>
+              <button
+                type="button"
+                onClick={() => {
+                  deleteActivity(value).then(() => {
+                    const newData = firestoreActivities.filter((entry) =>
+                      entry.id !== value ? value : null
+                    );
+                    setFirestoreActivities(newData);
+                    formatData(newData);
+                  });
+                }}
+              >
+                <span
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
-                  <span>
-                    <FaTrash />
-                    <p> delete</p>
-                  </span>
-                </button>
-              </div>
+                  <FaTrash fill={"red"} />
+                  <p> delete</p>
+                </span>
+              </button>
             </>
           );
         },

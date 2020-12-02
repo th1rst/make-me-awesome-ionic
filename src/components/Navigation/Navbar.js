@@ -18,8 +18,12 @@ import {
   IonGrid,
   IonRow,
   IonText,
+  IonItem,
+  IonIcon,
 } from "@ionic/react";
 import "./navbar.css";
+import { FaHome, FaClipboardList } from "react-icons/fa";
+import { FiSettings, FiLogOut } from "react-icons/fi";
 import { withFirebase } from "../Firebase/context";
 
 export function Navbar(props) {
@@ -73,10 +77,7 @@ export function Navbar(props) {
           <IonTitle>
             <IonGrid>
               <IonRow className="ion-justify-content-center">
-                <Link
-                  to="/overview"
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
+                <Link to="/overview" className="nav-link">
                   <IonText>Make Me Awesome</IonText>
                 </Link>
               </IonRow>
@@ -85,18 +86,38 @@ export function Navbar(props) {
         </IonToolbar>
 
         {sidebarOpen ? (
-          <IonCard>
-            <IonCardHeader>
-              <IonCardSubtitle>Home, All Activities etc</IonCardSubtitle>
-              <IonCardTitle>SIDEBAR</IonCardTitle>
-            </IonCardHeader>
-
-            <IonCardContent>
-              Keep close to Nature's heart... and break clear away, once in
-              awhile, and climb a mountain or spend a week in the woods. Wash
-              your spirit clean.
-            </IonCardContent>
-          </IonCard>
+          <IonItem>
+            <IonGrid>
+              <Link to="/overview" className="nav-link">
+                <IonRow className="nav-row ion-margin-vertical">
+                  <FaHome size={32} color="gray" />
+                  <p className="ion-margin-horizontal">Home</p>
+                </IonRow>
+              </Link>
+              <Link to="/all-activities" className="nav-link">
+                <IonRow className="nav-row ion-margin-vertical">
+                  <FaClipboardList size={32} color="gray" />
+                  <p className="ion-margin-horizontal">All Activities</p>
+                </IonRow>
+              </Link>
+              <Link to="/settings" className="nav-link">
+                <IonRow className="nav-row ion-margin-vertical">
+                  <FiSettings size={32} color="gray" />
+                  <p className="ion-margin-horizontal">Settings</p>
+                </IonRow>
+              </Link>
+              <Link
+                to="/"
+                onClick={props.firebase.doSignOut}
+                className="nav-link"
+              >
+                <IonRow className="nav-row ion-margin-vertical">
+                  <FiLogOut size={32} color="gray" />
+                  <p className="ion-margin-horizontal">Logout</p>
+                </IonRow>
+              </Link>
+            </IonGrid>
+          </IonItem>
         ) : null}
 
         {userMenuOpen ? (
