@@ -13,6 +13,7 @@ import { GrMail } from "react-icons/gr";
 import { AiOutlinePicture } from "react-icons/ai";
 import "./pages.css";
 import Navbar from "../components/Navigation/Navbar";
+import QuickActivitySettings from "../components/Settings/QuickActivitySettings";
 
 export default function Settings() {
   const [quickActivitiesForm, showQuickActivitiesForm] = useState(false);
@@ -39,6 +40,7 @@ export default function Settings() {
             <FaStar size={20} className="ion-margin-horizontal" /> Edit
             QuickActivities
           </IonButton>
+          {quickActivitiesForm ? <QuickActivitySettings /> : null}
           <IonButton
             className="ion-margin"
             expand="full"

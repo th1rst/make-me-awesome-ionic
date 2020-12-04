@@ -18,6 +18,7 @@ import {
   IonText,
   IonItemDivider,
 } from "@ionic/react";
+import { withAuthentication } from "../components/Session";
 
 const Home = (props) => {
   const [email, setEmail] = useState("");
@@ -117,4 +118,4 @@ const Home = (props) => {
   );
 };
 
-export default withFirebase(Home);
+export default withAuthentication(Home);
