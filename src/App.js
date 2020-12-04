@@ -10,6 +10,8 @@ import SignUpPage from "./pages/SignUpPage";
 import Overview from "./pages/Overview";
 import LiveActivity from "./pages/LiveActivity";
 import AllActivities from "./pages/AllActivities";
+import FAQ from "./pages/FAQ";
+import Settings from "./pages/Settings";
 
 import "@ionic/react/css/core.css";
 import "@ionic/react/css/normalize.css";
@@ -22,7 +24,6 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 import "./theme/variables.css";
-import FAQ from "./pages/FAQ";
 
 const App = () => (
   <IonApp>
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/overview" component={Overview} exact={true} />
             <Route path="/all-activities" component={AllActivities} exact={true} />
             <Route path="/faq" component={FAQ} exact={true} />
+            <Route path="/settings" component={Settings} exact={true} />
           </BrowserRouter>
         </IonRouterOutlet>
       </IonReactRouter>

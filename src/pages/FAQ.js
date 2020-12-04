@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import Navbar from "../components/Navigation/Navbar";
 import "./pages.css";
 
-export default function FAQ(props) {
+export default function FAQ() {
   const [whatIsThis, showWhatIsThis] = useState(false);
   const [howToUse, showHowToUse] = useState(false);
   const [whyUseIt, showWhyUseIt] = useState(false);
