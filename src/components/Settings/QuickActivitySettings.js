@@ -3,7 +3,6 @@ import { FaTrash } from "react-icons/fa";
 import ServerResponseToast from "../ServerResponseToast";
 import {
   IonButton,
-  IonCol,
   IonGrid,
   IonInput,
   IonItem,

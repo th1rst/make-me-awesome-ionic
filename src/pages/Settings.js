@@ -15,6 +15,8 @@ import Navbar from "../components/Navigation/Navbar";
 import QuickActivitySettings from "../components/Settings/QuickActivitySettings";
 import ChangeProfilePicForm from "../components/Settings/ChangeProfilePicForm";
 import ChangeBannerPictureForm from "../components/Settings/ChangeBannerPictureForm";
+import ChangeEmailForm from "../components/Settings/ChangeEmailForm";
+import ChangePasswordForm from "../components/Settings/ChangePasswordForm";
 
 export default function Settings() {
   const [quickActivitiesForm, showQuickActivitiesForm] = useState(false);
@@ -75,6 +77,8 @@ export default function Settings() {
             <GrMail size={20} className="ion-margin-horizontal" /> Change Email
             Address
           </IonButton>
+          {changeEmailAddressForm ? <ChangeEmailForm /> : null}
+
           <IonButton
             className="ion-margin"
             expand="full"
@@ -83,6 +87,8 @@ export default function Settings() {
             <FaKey size={20} className="ion-margin-horizontal" /> Change
             Password
           </IonButton>
+          {changePasswordForm ? <ChangePasswordForm /> : null}
+          
         </IonGrid>
       </IonContent>
     </IonPage>
