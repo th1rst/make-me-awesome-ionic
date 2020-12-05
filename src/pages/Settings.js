@@ -14,6 +14,7 @@ import "./pages.css";
 import Navbar from "../components/Navigation/Navbar";
 import QuickActivitySettings from "../components/Settings/QuickActivitySettings";
 import ChangeProfilePicForm from "../components/Settings/ChangeProfilePicForm";
+import ChangeBannerPictureForm from "../components/Settings/ChangeBannerPictureForm";
 
 export default function Settings() {
   const [quickActivitiesForm, showQuickActivitiesForm] = useState(false);
@@ -64,6 +65,8 @@ export default function Settings() {
             <AiOutlinePicture size={20} className="ion-margin-horizontal" />{" "}
             Change Banner Picture
           </IonButton>
+          {changeBannerPictureForm ? <ChangeBannerPictureForm /> : null}
+
           <IonButton
             className="ion-margin"
             expand="full"
