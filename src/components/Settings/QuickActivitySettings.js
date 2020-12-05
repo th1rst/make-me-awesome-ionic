@@ -11,6 +11,7 @@ import {
   IonLoading,
   IonRow,
   IonSelect,
+  IonSelectOption,
   IonText,
 } from "@ionic/react";
 import { withFirebase } from "../Firebase/context";
@@ -30,7 +31,6 @@ function QuickActivitySettings(props) {
   const [productivityType, setProductivityType] = useState("Productive");
   const [categoryName, setCategoryName] = useState("Work");
   const [activityPictureURL, setActivityPictureURL] = useState("");
-  const [isEditingDuration, setIsEditingDuration] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [showServerResponseToast, setShowServerResponseToast] = useState(false);
@@ -133,7 +133,7 @@ function QuickActivitySettings(props) {
         <IonLoading />
       ) : (
         <>
-          <IonGrid>
+          <IonGrid className="ion-margin">
             {quickActivities.length === 0 ? (
               <IonRow className="row">
                 <IonText className="subheading">
@@ -141,9 +141,9 @@ function QuickActivitySettings(props) {
                 </IonText>
               </IonRow>
             ) : (
-              <div>
+              <>
                 <IonRow className="row">
-                  <IonText className="subheading">
+                  <IonText className="heading">
                     Current QuickActivities:
                   </IonText>
                 </IonRow>
@@ -152,7 +152,9 @@ function QuickActivitySettings(props) {
                   <IonItem className="ion-margin">
                     <IonRow className="row">
                       <IonRow className="row ion-margin">
-                        {quickActivity.name}
+                        <IonText className="subheading">
+                          {quickActivity.name}
+                        </IonText>
                       </IonRow>
                       <IonRow className="row ion-margin">
                         {quickActivity.productiveness}
@@ -175,91 +177,77 @@ function QuickActivitySettings(props) {
                     </IonRow>
                   </IonItem>
                 ))}
-              </div>
+              </>
             )}
             <IonRow className="row">
-              <IonText className="subheading">Add QuickActivity</IonText>
+              <IonText className="heading">Add QuickActivity</IonText>
             </IonRow>
+            <IonItem>
+              <IonLabel>
+                Name<IonText color="danger">*</IonText>
+              </IonLabel>
+              <IonInput
+                placeholder="Please name your Activity"
+                value={activityName}
+                onIonChange={(e) => setActivityName(e.target.value)}
+              />
+            </IonItem>
 
-            <div>
-              <div>
-                <div>
-                  <IonLabel>
-                    <span>
-                      Name <span>*</span>
-                    </span>
-                    <IonInput
-                      placeholder="Please name your Activity"
-                      value={activityName}
-                      onIonChange={(e) => setActivityName(e.target.value)}
-                    />
-                  </IonLabel>
+            <IonItem>
+              <IonLabel>Category</IonLabel>
+              <IonSelect
+                value={categoryName}
+                placeholder="Category"
+                onIonChange={(e) => setCategoryName(e.target.value)}
+              >
+                {defaultCategories.map((type) => (
+                  <IonSelectOption value={type} key={type}>
+                    {type}
+                  </IonSelectOption>
+                ))}
+              </IonSelect>
+            </IonItem>
 
-                  <IonLabel>
-                    <span>Category</span>
-                    <IonSelect
-                      onChange={(e) => setCategoryName(e.target.value)}
-                    >
-                      {defaultCategories.map((entry) => (
-                        <option value={entry} key={entry}>
-                          {entry}
-                        </option>
-                      ))}
-                    </IonSelect>
-                  </IonLabel>
-                  {isEditingDuration ? (
-                    <IonLabel>
-                      <span>
-                        Duration (minutes) <span>*</span>
-                      </span>
-                      <IonInput
-                        placeholder={`How long do you usually do ${
-                          activityName ? activityName : "(Name)"
-                        } for (in minutes)?`}
-                        value={activityDuration}
-                        onIonChange={(e) => setActivityDuration(e.target.value)}
-                        valid={validateNumbersOnly(activityDuration)}
-                      />
-                    </IonLabel>
-                  ) : (
-                    <IonLabel>
-                      <span>
-                        Duration (minutes) <span>*</span>
-                      </span>
-                      <IonInput
-                        placeholder="How long do you usually do (Name) for (in minutes)?"
-                        onClick={() => setIsEditingDuration(true)}
-                      />
-                    </IonLabel>
-                  )}
+            <IonItem>
+              <IonLabel>
+                Duration (minutes)<IonText color="danger">*</IonText>
+              </IonLabel>
+              <IonInput
+                placeholder={`How long do you usually do ${
+                  activityName ? activityName : "(Name)"
+                } for (in minutes)?`}
+                value={activityDuration}
+                onIonChange={(e) => setActivityDuration(e.target.value)}
+                valid={validateNumbersOnly(activityDuration)}
+              />
+            </IonItem>
 
-                  <IonLabel>
-                    <span>Productivity</span>
-                    <IonSelect
-                      onChange={(e) => setProductivityType(e.target.value)}
-                    >
-                      {defaultProductivityTypes.map((type) => (
-                        <option value={type} key={type}>
-                          {type}
-                        </option>
-                      ))}
-                    </IonSelect>
-                  </IonLabel>
-                  <IonLabel>
-                    <span>Activity Picture URL</span>
-                    <IonInput
-                      placeholder="Please paste a URL of your desired Activity Picture"
-                      value={activityPictureURL}
-                      onChange={(e) => setActivityPictureURL(e.target.value)}
-                    />
-                  </IonLabel>
+            <IonItem>
+              <IonLabel>Productivity</IonLabel>
+              <IonSelect
+                value={productivityType}
+                placeholder="Select Type"
+                onIonChange={(e) => setProductivityType(e.detail.value)}
+              >
+                {defaultProductivityTypes.map((type) => (
+                  <IonSelectOption value={type} key={type}>
+                    {type}
+                  </IonSelectOption>
+                ))}
+              </IonSelect>
+            </IonItem>
 
-                  <button onClick={applyQuickActivity} disabled={isInvalid}>
-                    <span>Apply</span>
-                  </button>
-                </div>
-              </div>
-            </div>
+            <IonItem>
+              <IonLabel>Activity Picture URL</IonLabel>
+              <IonInput
+                placeholder="Please paste a URL of your desired Activity Picture"
+                value={activityPictureURL}
+                onIonChange={(e) => setActivityPictureURL(e.target.value)}
+              />
+            </IonItem>
+            <IonButton onClick={applyQuickActivity} disabled={isInvalid}>
+              Apply
+            </IonButton>
 
             {/* ------------- SERVER RESPONSE MODAL ------------- */}
 
