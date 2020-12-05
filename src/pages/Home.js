@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import BackgroundSlider from "../components/BackgroundSlider/BackgroundSlider";
-import { withFirebase } from "../components/Firebase/context";
 import {
   IonContent,
   IonPage,

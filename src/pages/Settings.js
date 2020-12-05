@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   IonButton,
-  IonCol,
   IonContent,
   IonGrid,
   IonPage,
@@ -14,11 +13,14 @@ import { AiOutlinePicture } from "react-icons/ai";
 import "./pages.css";
 import Navbar from "../components/Navigation/Navbar";
 import QuickActivitySettings from "../components/Settings/QuickActivitySettings";
+import ChangeProfilePicForm from "../components/Settings/ChangeProfilePicForm";
 
 export default function Settings() {
   const [quickActivitiesForm, showQuickActivitiesForm] = useState(false);
   const [changeProfilePicForm, showChangeProfilePicForm] = useState(false);
-  const [changeBannerPictureForm, showChangeBannerPictureForm] = useState(false);
+  const [changeBannerPictureForm, showChangeBannerPictureForm] = useState(
+    false
+  );
   const [changeEmailAddressForm, showChangeEmailAddressForm] = useState(false);
   const [changePasswordForm, showChangePasswordForm] = useState(false);
 
@@ -41,6 +43,7 @@ export default function Settings() {
             QuickActivities
           </IonButton>
           {quickActivitiesForm ? <QuickActivitySettings /> : null}
+
           <IonButton
             className="ion-margin"
             expand="full"
@@ -49,6 +52,8 @@ export default function Settings() {
             <FaRegUser size={20} className="ion-margin-horizontal" /> Change
             Profile Picture
           </IonButton>
+          {changeProfilePicForm ? <ChangeProfilePicForm /> : null}
+
           <IonButton
             className="ion-margin"
             expand="full"

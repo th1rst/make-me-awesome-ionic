@@ -49,3 +49,11 @@
   font-family: Arial, Helvetica, sans-serif;
   margin: 0.5em auto;
 }
+
+.filepicker {
+  display: flex;
+  margin: 1em auto;
+  padding: 10px;
+  border: 2px dashed gray;
+  border-radius: 20px;
+}
