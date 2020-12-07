@@ -1,5 +1,7 @@
 {
   "name": "Make Me Awesome",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }
