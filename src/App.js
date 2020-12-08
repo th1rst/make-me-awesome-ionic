@@ -24,13 +24,14 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 import "./theme/variables.css";
+import "./app.css"
 
 const App = () => (
-  <IonApp>
+  <IonApp className="app-container">
     <FirebaseContext.Provider value={new Firebase()}>
       <IonReactRouter>
         <IonRouterOutlet>
-          <BrowserRouter>
+          <BrowserRouter basename="/portfolio/make-me-awesome-ionic/">
             <Route path="/" component={Home} exact={true} />
             <Route path="/forgotpassword" component={ForgotPassword} exact={true} />
             <Route path="/activity" component={LiveActivity} exact={true} />
