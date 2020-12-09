@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import BackgroundSlider from "../components/BackgroundSlider/BackgroundSlider";
 import {
   IonContent,
@@ -24,6 +24,7 @@ const Home = (props) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  let history = useHistory();
 
   const submitCredentials = (event) => {
     props.firebase
@@ -33,6 +34,7 @@ const Home = (props) => {
         setPassword(password);
         setLoggedIn(true);
       })
+      .then(history.push("/overview"))
       .catch((error) => {
         setError(error);
       });
@@ -42,7 +44,7 @@ const Home = (props) => {
   const isInvalid = password === "" || email === "";
 
   return loggedIn ? (
-    <Redirect to="/overview" />
+    <></>
   ) : (
     <IonPage>
       <IonContent fullscreen>
@@ -92,24 +94,26 @@ const Home = (props) => {
             >
               Login
             </IonButton>
-            <IonButton
-              className="ion-margin-bottom"
-              expand="block"
-              color="secondary"
-              routerLink="/signup"
-            >
-              Create Account
-            </IonButton>
+            <Link to="/signup">
+              <IonButton
+                className="ion-margin-bottom"
+                expand="block"
+                color="secondary"
+              >
+                Create Account
+              </IonButton>
+            </Link>
             <IonItemDivider />
-            <IonButton
-              className="ion-margin-bottom"
-              size="small"
-              expand="block"
-              color="dark"
-              routerLink="/forgotpassword"
-            >
-              Forgot Password?
-            </IonButton>
+            <Link to="/forgotpassword">
+              <IonButton
+                className="ion-margin-bottom"
+                size="small"
+                expand="block"
+                color="dark"
+              >
+                Forgot Password?
+              </IonButton>
+            </Link>
           </IonCardContent>
         </IonCard>
       </IonContent>

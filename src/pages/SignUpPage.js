@@ -13,7 +13,6 @@ import {
   IonInput,
   IonText,
 } from "@ionic/react";
-import Navbar from "../components/Navigation/Navbar";
 
 function SignUpPage(props) {
   const [username, setUsername] = useState("");
@@ -67,7 +66,6 @@ function SignUpPage(props) {
     <Redirect to="/overview" />
   ) : (
     <IonPage>
-      <Navbar />
       <IonContent fullscreen>
         <IonCard>
           <IonCardTitle className="ion-padding ion-text-center ion-text-uppercase">
